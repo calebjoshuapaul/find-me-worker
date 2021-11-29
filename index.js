@@ -3,7 +3,8 @@ addEventListener("fetch", (event) => {
 });
 
 async function handleRequest(request) {
-  let htmlContent = "<h1> Data from request: " + request.cf + "</h1>";
+  console.log(request.cf);
+  let htmlContent = `<h1> Country: ${request.cf.country} </h1>`;
 
   return new Response(htmlContent, {
     headers: { "content-type": "text/plain" },
