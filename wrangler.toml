@@ -5,3 +5,9 @@ usage_model = ''
 compatibility_flags = []
 workers_dev = true
 compatibility_date = "2021-11-29"
+
+[build]
+command = "npm install && npm run build"
+
+[build.upload]
+format = "service-worker"
