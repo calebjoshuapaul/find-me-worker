@@ -9,8 +9,8 @@ async function handleRequest(request) {
   <body>
   <head></head>
   <h1> Country: ${(request.cf || {}).country} </h1>
-  <p> Colo: ${request.cf.colo || {}}</p>
-  <p> PostalCode: ${request.cf.postalCode || {}} </p>
+  <p> Colo: ${(request.cf || {}).colo}</p>
+  <p> PostalCode: ${(request.cf || {}).postalcode} </p>
   </body>
   `;
 
