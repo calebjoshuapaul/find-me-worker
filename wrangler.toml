@@ -1,5 +1,5 @@
 name = "find-me-worker"
-type = "webpack"
+type = "javascript"
 account_id = 'ebf1ae44399e99454f38475e6dc95c77'
 usage_model = ''
 compatibility_flags = []
