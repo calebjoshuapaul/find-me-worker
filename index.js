@@ -1,20 +1,18 @@
+const dotenv = require("dotenv");
+
+console.log(process.env.HELLO);
+
 addEventListener("fetch", (event) => {
-  event.respondWith(handleRequest(event.request));
+  event.respondWith(handleRequest(event));
 });
 
-async function handleRequest(request) {
-  console.log(request.cf || {});
-  let htmlContent = `
-  <!DOCTYPE html>
-  <body>
-  <head></head>
-  <h1> Country: ${(request.cf || {}).country} </h1>
-  <p> Colo: ${(request.cf || {}).colo}</p>
-  <p> PostalCode: ${(request.cf || {}).postalcode} </p>
-  </body>
-  `;
+async function handleRequest(event) {
+  const request = event.request;
+  const res = JSON.stringify(request.cf.city);
 
-  return new Response(htmlContent, {
+  ("Delhi");
+
+  return new Response(res, {
     headers: { "content-type": "text/plain" },
   });
 }
