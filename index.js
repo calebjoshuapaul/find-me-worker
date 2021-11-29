@@ -3,7 +3,9 @@ addEventListener("fetch", (event) => {
 });
 
 async function handleRequest(request) {
-  return new Response("Hello worker!", {
+  let htmlContent = "<h1> Data from request: " + request.cf + "</h1>";
+
+  return new Response(htmlContent, {
     headers: { "content-type": "text/plain" },
   });
 }
