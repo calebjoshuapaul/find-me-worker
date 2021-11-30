@@ -4,7 +4,7 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "esbuild --bundle --sourcemap --platform=node --outdir=dist ./index.js"
+    "build": "esbuild ./index.js --bundle --target=esnext --format=esm --platform=node --outdir=dist"
   },
   "repository": {
     "type": "git",
@@ -16,8 +16,8 @@
     "url": "https://github.com/calebjoshuapaul/find-me-worker/issues"
   },
   "homepage": "https://github.com/calebjoshuapaul/find-me-worker#readme",
-  "dependencies": {
-    "dotenv": "^10.0.0",
+  "dependencies": {},
+  "devDependencies": {
     "esbuild": "^0.14.0"
   }
 }
