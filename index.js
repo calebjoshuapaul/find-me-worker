@@ -26,7 +26,11 @@ async function handleRequest(event) {
   const result = JSON.stringify(list);
 
   return new Response(result, {
-    headers: { "content-type": "application/json" },
+    headers: {
+      "content-type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      Vary: "Origin",
+    },
   });
 }
 
