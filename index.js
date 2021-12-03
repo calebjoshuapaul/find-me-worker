@@ -21,6 +21,8 @@ async function handleRequest(event) {
       name: poi.name,
       distance: dist,
       contact: poi.phone ? poi.phone : "No contact info found",
+      latitude: latitude,
+      longitude: longitude,
     };
   });
   const result = JSON.stringify(list);
