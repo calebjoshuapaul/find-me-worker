@@ -17,7 +17,7 @@ async function handleRequest(event) {
   const places = await fetchNearbyPlaces(latitude, longitude);
   // console.log(JSON.stringify(places.results));
 
-  const list = places.results.map(function ({ address, poi, dist }) {
+  let list = places.results.map(function ({ address, poi, dist }) {
     return {
       address: address.freeformAddress,
       name: poi.name,
@@ -25,12 +25,9 @@ async function handleRequest(event) {
       contact: poi.phone ? poi.phone : "No contact info found",
     };
   });
-  list = {
-    latitude: latitude,
-    longitude: longitude,
-  };
-
-  list.mapApi = `${MapApiEndPoint}
+  (list.latitude = latitude),
+    (list.longitude = longitude),
+    (list.mapApi = `${MapApiEndPoint}
   ?layer=basic
   &style=main
   &format=png
@@ -39,7 +36,8 @@ async function handleRequest(event) {
   &width=550
   &height=350
   &view=IN
-  &key=${API_KEY}`;
+  &key=${API_KEY}`);
+
   const result = JSON.stringify(list);
 
   return new Response(result, {
