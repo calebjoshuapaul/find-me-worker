@@ -2,6 +2,8 @@ addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event));
 });
 
+const MapApiEndPoint = "https://api.tomtom.com/map/1/staticimage";
+
 // https://api.tomtom.com/search/2/nearbySearch/.json?lat=28.479162&lon=77.311131&key=*****
 
 const API_ENDPOINT = "https://api.tomtom.com/search/2/nearbySearch/.json";
@@ -21,10 +23,23 @@ async function handleRequest(event) {
       name: poi.name,
       distance: dist,
       contact: poi.phone ? poi.phone : "No contact info found",
-      latitude: latitude,
-      longitude: longitude,
     };
   });
+  list = {
+    latitude: latitude,
+    longitude: longitude,
+  };
+
+  list.mapApi = `${MapApiEndPoint}
+  ?layer=basic
+  &style=main
+  &format=png
+  &zoom=14
+  &center=${data[0].longitude},${data[0].latitude}
+  &width=550
+  &height=350
+  &view=IN
+  &key=${API_KEY}`;
   const result = JSON.stringify(list);
 
   return new Response(result, {
