@@ -1,23 +1,15 @@
+// index.js
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event));
 });
-
-const MapApiEndPoint = "https://api.tomtom.com/map/1/staticimage";
-
-// https://api.tomtom.com/search/2/nearbySearch/.json?lat=28.479162&lon=77.311131&key=*****
-
-const API_ENDPOINT = "https://api.tomtom.com/search/2/nearbySearch/.json";
-
+var MapApiEndPoint = "https://api.tomtom.com/map/1/staticimage";
+var API_ENDPOINT = "https://api.tomtom.com/search/2/nearbySearch/.json";
 async function handleRequest(event) {
   const request = event.request;
-
   let latitude = request.cf.latitude;
   let longitude = request.cf.longitude;
-
   const places = await fetchNearbyPlaces(latitude, longitude);
-  // console.log(JSON.stringify(places.results));
-
-  let list = places.results.map(function ({ address, poi, dist }) {
+  const list = places.results.map(function ({ address, poi, dist }) {
     return {
       address: address.freeformAddress,
       name: poi.name,
@@ -25,22 +17,9 @@ async function handleRequest(event) {
       contact: poi.phone ? poi.phone : "No contact info found",
     };
   });
-  (list.latitude = latitude),
-    (list.longitude = longitude),
-    (list.mapApi = `${MapApiEndPoint}
-  ?layer=basic
-  &style=main
-  &format=png
-  &zoom=14
-  &center=${data[0].longitude},${data[0].latitude}
-  &width=550
-  &height=350
-  &view=IN
-  &key=${API_KEY}`);
-
-  const result = JSON.stringify(list);
-
-  return new Response(result, {
+  const list2 = { latitude: latitude, longitude: longitude };
+  const final = [JSON.stringify(list), JSON.stringify(list2)];
+  return new Response(final, {
     headers: {
       "content-type": "application/json",
       "Access-Control-Allow-Origin": "*",
@@ -48,12 +27,11 @@ async function handleRequest(event) {
     },
   });
 }
-
 async function fetchNearbyPlaces(lat, long) {
   const response = fetch(
     API_ENDPOINT + `?lat=${lat}&lon=${long}&key=${API_KEY}`
   )
-    .then((response) => response.json())
-    .then((data) => data);
+    .then((response2) => response2.json())
+    .then((data2) => data2);
   return response;
 }
