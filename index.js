@@ -2,7 +2,6 @@
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event));
 });
-var MapApiEndPoint = "https://api.tomtom.com/map/1/staticimage";
 var API_ENDPOINT = "https://api.tomtom.com/search/2/nearbySearch/.json";
 async function handleRequest(event) {
   const request = event.request;
@@ -17,9 +16,9 @@ async function handleRequest(event) {
       contact: poi.phone ? poi.phone : "No contact info found",
     };
   });
-  const list2 = { latitude: latitude, longitude: longitude };
+  const list2 = { latitude, longitude };
   const final = [JSON.stringify(list), JSON.stringify(list2)];
-  return new Response(final, {
+  return new Response("[" + final + "]", {
     headers: {
       "content-type": "application/json",
       "Access-Control-Allow-Origin": "*",
