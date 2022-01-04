@@ -8,6 +8,7 @@ async function handleRequest(event) {
   let latitude = request.cf.latitude;
   let longitude = request.cf.longitude;
   const places = await fetchNearbyPlaces(latitude, longitude);
+
   const list = places.results.map(function ({ address, poi, dist }) {
     return {
       address: address.freeformAddress,
